@@ -1,0 +1,8 @@
+<app-list 
+  [data]="spareParts" 
+  [columns]="columns"
+  [tableTitle]="'Spare Parts'"
+  [createPath]="'/create-spare-part'"
+  (viewItem)="onView($event)"
+  (deleteItem)="onDelete($event)"
+></app-list>

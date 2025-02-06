@@ -1,0 +1,51 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MaintenanceJob } from '../../../core/models/maintenance-job';
+import { MaintenanceJobService } from '../../../core/services/maintenance-job.service';
+import { DetailsComponent } from '../../../shared/components/details/details.component';
+
+@Component({
+  selector: 'app-maintenance-job-details',
+  standalone: true,
+  imports: [CommonModule, DetailsComponent],
+  templateUrl: './maintenance-job-details.component.html',
+  styleUrls: ['./maintenance-job-details.component.css']
+})
+export class MaintenanceJobDetailsComponent implements OnInit {
+  title = 'Maintenance Job'
+  jobId!: number;
+  job: MaintenanceJob | undefined;
+
+  constructor(private service: MaintenanceJobService, private route: ActivatedRoute, private router: Router) { }
+
+  ngOnInit(): void {
+    this.jobId = +this.route.snapshot.params['id'];
+    this.getMaintenanceJob();
+  }
+
+  getMaintenanceJob(): void {
+    this.service.getById(this.jobId).subscribe({
+      next: (job) => {
+        this.job = job;
+      },
+      error: (err) => console.error('Failed to fetch maintenance job:', err),
+    });
+  }
+
+  onDelete(): void {
+    const isConfirmed = confirm('Are you sure you want to delete this maintenance job?');
+    if (isConfirmed) {
+      this.service.delete(this.jobId).subscribe({
+        next: () => {
+          alert('Maintenance job deleted successfully!');
+          this.router.navigate(['/all-maintenance-jobs']);
+        },
+        error: (err) => {
+          console.error('Failed to delete maintenance job:', err);
+          alert('Failed to delete maintenance job. Please try again later.');
+        },
+      });
+    }
+  }
+}

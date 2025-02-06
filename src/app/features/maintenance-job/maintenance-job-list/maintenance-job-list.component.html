@@ -1,0 +1,8 @@
+<app-list 
+  [data]="maintenanceJobs" 
+  [columns]="columns"
+  [tableTitle]="'Maintenance Jobs'"
+  [createPath]="'/create-maintenance-job'"
+  (viewItem)="onView($event)"
+  (deleteItem)="onDelete($event)"
+></app-list>

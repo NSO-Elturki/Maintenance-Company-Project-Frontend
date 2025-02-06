@@ -1,0 +1,10 @@
+<div *ngIf="data">
+  <h2>{{title}} Details:</h2>
+  <ul>
+    <li *ngFor="let key of objectKeys(data)">
+      <strong>{{ key }}:</strong> {{ data[key] }}
+    </li>
+  </ul>
+  <button class="btn btn-sm btn-danger"
+  (click)="onDelete(data.id)">Delete</button>
+</div>
