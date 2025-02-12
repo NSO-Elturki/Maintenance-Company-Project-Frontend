@@ -5,5 +5,5 @@ export interface  MaintenanceJob {
     name: string;
     costPerHour: number ;
     timeToFinish: number;
-    spareParts: SparePart[];
+    spareParts?: SparePart[];
 }

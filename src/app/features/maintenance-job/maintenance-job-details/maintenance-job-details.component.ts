@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { MaintenanceJob } from '../../../core/models/maintenance-job';
 import { MaintenanceJobService } from '../../../core/services/maintenance-job.service';
 import { DetailsComponent } from '../../../shared/components/details/details.component';
+import { MaintenanceSpareService } from '../../../core/services/maintenance-spare.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-maintenance-job-details',
@@ -16,22 +18,51 @@ export class MaintenanceJobDetailsComponent implements OnInit {
   title = 'Maintenance Job'
   jobId!: number;
   job: MaintenanceJob | undefined;
+  labels = ['ID', 'Name', 'Cost Per Hour', 'Duration', 'Spare Parts'];
 
-  constructor(private service: MaintenanceJobService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private service: MaintenanceJobService, private route: ActivatedRoute, private maintenanceSpareService:MaintenanceSpareService , private router: Router) { }
 
   ngOnInit(): void {
     this.jobId = +this.route.snapshot.params['id'];
     this.getMaintenanceJob();
   }
 
+  // getMaintenanceJob(): void {
+  //   this.service.getById(this.jobId).subscribe({
+  //     next: (job) => {
+  //       this.job = job;
+  //     },
+  //     error: (err) => console.error('Failed to fetch maintenance job:', err),
+  //   });
+  // }
+
+  // fetchSpareParts() {
+  //   this.maintenanceSpareService.getAllSparePartsByMaintenanceJobID(this.jobId).subscribe({
+  //     next: (data) => {
+  //       if(this.job)
+  //         this.job.spareParts = data.map(item => item.sparePart);
+  //         console.log(this.job)
+  //     },
+  //     error: (err) => {
+  //       console.error('Error fetching spare parts:', err);
+  //     }
+  //   });
+  // }
   getMaintenanceJob(): void {
-    this.service.getById(this.jobId).subscribe({
-      next: (job) => {
-        this.job = job;
-      },
-      error: (err) => console.error('Failed to fetch maintenance job:', err),
-    });
-  }
+      this.service.getById(this.jobId).pipe(
+        switchMap((job) => {
+          this.job = job;
+          return this.maintenanceSpareService.getAllSparePartsByMaintenanceJobID(this.jobId);
+        })
+      ).subscribe({
+        next: (data) => {
+          if (this.job) {
+            this.job.spareParts = data.map(item => item.sparePart);
+          }
+        },
+        error: (err) => console.error('Error fetching:', err),
+      });
+    }
 
   onDelete(): void {
     const isConfirmed = confirm('Are you sure you want to delete this maintenance job?');

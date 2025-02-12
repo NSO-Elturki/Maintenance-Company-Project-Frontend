@@ -30,7 +30,9 @@ export class SchedluledMaintenanceJobCreateComponent implements OnInit {
     id: 0,
     date: '',
     time: '',
-    maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0, spareParts: [] }  // Initialize the address object
+    // maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0, spareParts: [] }  // Initialize the address object
+    maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0}  // Initialize the address object
+
   };
 
   constructor(private maintenanceJobService: MaintenanceJobService,
@@ -65,7 +67,9 @@ export class SchedluledMaintenanceJobCreateComponent implements OnInit {
       id: 0,
       date: '',
       time: '',
-      maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0, spareParts: [] }
+      // maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0, spareParts: [] }
+      maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0}
+
     };
   }
 

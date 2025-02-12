@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export class BaseService<T> {
-  constructor(protected http: HttpClient, private baseUrl: string) {}
+  constructor(protected http: HttpClient, protected baseUrl: string) {}
 
   getAll(): Observable<T[]> {
     return this.http.get<T[]>(`${this.baseUrl}`);

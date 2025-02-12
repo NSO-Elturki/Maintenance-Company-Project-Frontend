@@ -1,10 +1,65 @@
-<div *ngIf="data">
-  <h2>{{title}} Details:</h2>
-  <ul>
-    <li *ngFor="let key of objectKeys(data)">
-      <strong>{{ key }}:</strong> {{ data[key] }}
-    </li>
-  </ul>
-  <button class="btn btn-sm btn-danger"
-  (click)="onDelete(data.id)">Delete</button>
+<div class="container mt-5">
+  <div class="row">
+    <!-- Wider card: col-md-8 with offset-md-2 -->
+    <div class="col-md-7 offset-md-2">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h3 class="card-title mb-0">View {{title}}</h3>
+        </div>
+        <div class="card-body">
+          <!-- Non-Array Items (Top Section) -->
+          <div class="row">
+            <div *ngFor="let key of objectKeys(data); let i = index" class="col-md-6 mt-3">
+              <div *ngIf="!isArray(data[key]) && !isObject(data[key])" class="form-group">
+                <label class="font-weight-bold">{{labels[i]}}:</label>
+                <p class="form-control-plaintext">
+                  {{ data[key] }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Array and Object Items -->
+          <div>
+            <div *ngFor="let key of objectKeys(data); let i = index" class="col-md-12 mt-3">
+              <!-- Array Items -->
+              <div *ngIf="isArray(data[key])" class="form-group">
+                <label class="font-weight-bold">{{labels[i]}}:</label>
+                <ul *ngIf="data[key].length > 0; else emptyMessage">
+                  <li *ngFor="let item of data[key]">
+                    {{ item.name }}
+                  </li>
+                </ul>
+                <ng-template #emptyMessage>
+                  <p class="text-muted">No items available</p>
+                </ng-template>
+              </div> 
+            
+              <!-- Object Items -->
+              <div *ngIf="isObject(data[key])">
+                <label class="font-weight-bold">{{labels[i]}}:</label>
+
+                <!-- Display object properties in one row using flexbox -->
+                <div class="d-flex align-items-center">
+                  <div *ngFor="let subKey of objectKeys(data[key])" class="me-3">
+                    <div *ngIf="!isArray(data[key][subKey])">
+                      <span class="font-weight-bold">{{ subKey }}:</span>
+                      <span>
+                        {{ data[key][subKey] }}</span>
+                    </div>
+                  </div>
+                  <!-- Button at the end -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Back Button -->
+          <div class="mt-3 d-flex justify-content-end">
+            <button class="btn btn-sm btn-danger" (click)="onDelete(data.id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

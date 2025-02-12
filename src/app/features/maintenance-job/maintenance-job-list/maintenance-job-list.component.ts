@@ -5,6 +5,7 @@ import { MaintenanceJob } from '../../../core/models/maintenance-job';
 import { Router } from '@angular/router';
 import { ListComponent } from '../../../shared/components/list/list.component';
 import { FormsModule } from '@angular/forms';
+import { MaintenanceSpareService } from '../../../core/services/maintenance-spare.service';
 
 @Component({
   selector: 'app-maintenance-job-list',
@@ -13,13 +14,14 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './maintenance-job-list.component.css'
 })
 export class MaintenanceJobListComponent implements OnInit {
-  columns = ['id', 'name', 'costPerHour', 'timeToFinish' ];
+  columns = ['id', 'name', 'costPerHour', 'timeToFinish'];
   maintenanceJobs: MaintenanceJob[] = [];
+  spareParts: any[] = []
 
-  constructor(private service: MaintenanceJobService, private router: Router) { }
+  constructor(private service: MaintenanceJobService, private ms: MaintenanceSpareService, private router: Router) { }
 
   onView(jobId: any) {
-    this.router.navigate(['/maintenance-job', jobId]); 
+    this.router.navigate(['/maintenance-job', jobId]);
   }
 
   onDelete(id: number) {
@@ -29,7 +31,7 @@ export class MaintenanceJobListComponent implements OnInit {
       });
     }
   }
-  
+
   ngOnInit() {
     this.service.getAll().subscribe((jobs) => (this.maintenanceJobs = jobs));
   }

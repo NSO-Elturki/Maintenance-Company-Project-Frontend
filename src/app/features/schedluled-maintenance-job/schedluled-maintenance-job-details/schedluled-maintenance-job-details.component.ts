@@ -16,6 +16,8 @@ export class SchedluledMaintenanceJobDetailsComponent {
   title = 'Schedluled Maintenance Job'
   schedluledMaintenanceJobId!: number;
   schedluledMaintenanceJob: SchedluledMaintenanceJob | undefined;
+  labels = ['ID', 'Date', 'Time', 'Maintenance Job'];
+
 
   constructor(private schedluledmaintenanceJobService: SchedluledMaintenanceJobService, private route: ActivatedRoute, private router: Router) { }
 

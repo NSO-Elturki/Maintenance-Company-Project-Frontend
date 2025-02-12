@@ -26,7 +26,7 @@ export class MaintenanceJobCreateFormComponent {
     name: '',
     costPerHour: 0,
     timeToFinish: 0,
-    spareParts: []
+   // spareParts: []
   };
 
   constructor(private service: MaintenanceJobService, private router: Router) { }
@@ -37,7 +37,7 @@ export class MaintenanceJobCreateFormComponent {
       name: newItem.name,
       costPerHour: newItem.costPerHour,
       timeToFinish: newItem.timeToFinish,
-      spareParts: []
+     // spareParts: []
     };
     this.service.create(this.maintenanceJob).subscribe({
       next: (part) => {
@@ -60,7 +60,7 @@ export class MaintenanceJobCreateFormComponent {
       name: '',
       costPerHour: 0,
       timeToFinish: 0,
-      spareParts: []
+    //  spareParts: []
     };
   }
 
