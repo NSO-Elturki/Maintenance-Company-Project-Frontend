@@ -9,7 +9,7 @@ import { MaintenanceSpareService } from '../../../core/services/maintenance-spar
 
 @Component({
   selector: 'app-maintenance-job-list',
-  imports: [CommonModule, ListComponent, FormsModule],
+  imports: [ListComponent],
   templateUrl: './maintenance-job-list.component.html',
   styleUrl: './maintenance-job-list.component.css'
 })

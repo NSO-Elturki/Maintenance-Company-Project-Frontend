@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { MaintenanceJob } from '../../../core/models/maintenance-job';
 import { MaintenanceJobService } from '../../../core/services/maintenance-job.service';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateComponent } from '../../../shared/components/create/create.component';
 
 @Component({
   selector: 'app-maintenance-job-create-form',
-  imports: [FormsModule, CreateComponent],
+  imports: [CreateComponent],
   templateUrl: './maintenance-job-create-form.component.html',
   styleUrl: './maintenance-job-create-form.component.css'
 })

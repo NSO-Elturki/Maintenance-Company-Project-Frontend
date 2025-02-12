@@ -20,18 +20,9 @@ export class DetailsComponent {
       this.deleteItem.emit(item);
     }
     isArray(value: any): boolean {
-      console.log(Array.isArray(value))
       return Array.isArray(value);
     }
     isObject(value: any): boolean {
       return typeof value === 'object' && !Array.isArray(value) && value !== null;
     }
-    // getObjectString(obj: any): string {
-    //   console.log('hhhhh',obj.constructor.name)
-    //   //if (obj && obj.toString && obj.constructor.name === 'Address') {
-    //     return obj.toString(); // Use custom toString if available
-    // //  }
-    //   //return JSON.stringify(obj, null, 2); // Fallback to JSON.stringify
-    // }
-
 }

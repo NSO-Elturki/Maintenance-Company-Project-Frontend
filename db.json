@@ -1,47 +1,37 @@
 {
-  "maintenanceJobs": [
-    {
-      "id": 1860,
-      "name": 1860,
-      "costPerHour": "11",
-      "timeToFinish": "1",
-      "spareParts": []
-    }
-  ],
+  "maintenanceJobs": [],
   "scheduledMaintenanceJobs": [
     {
-      "id": 2276,
-      "date": "2025-02-06",
-      "time": "01:03",
+      "id": 2791,
+      "date": "2025-02-21",
+      "time": "15:40",
       "maintenanceJob": {
-        "id": 1860,
-        "name": 1860,
+        "id": 3631,
+        "name": "test1",
         "costPerHour": "11",
-        "timeToFinish": "1",
-        "spareParts": []
+        "timeToFinish": "1"
       }
     }
   ],
   "spareParts": [
     {
-      "id": 3552,
-      "name": "ccc",
-      "price": "22"
+      "id": 9413,
+      "name": "part1",
+      "price": "33"
     }
   ],
   "maintenanceSpare": [
     {
       "maintenanceJob": {
-        "id": 1860,
-        "name": "nagi",
+        "id": 3631,
+        "name": "test1",
         "costPerHour": "11",
-        "timeToFinish": "1",
-        "spareParts": []
+        "timeToFinish": "1"
       },
       "sparePart": {
-        "id": 3552,
-        "name": "ccc",
-        "price": "22"
+        "id": 9413,
+        "name": "part1",
+        "price": "33"
       },
       "id": 1
     }

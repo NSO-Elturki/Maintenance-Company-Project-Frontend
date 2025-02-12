@@ -3,7 +3,6 @@ import { SparePartService } from '../../../core/services/spare-part.service';
 import { SparePart } from '../../../core/models/spare-part';
 import { Router } from '@angular/router';
 import { CreateComponent } from '../../../shared/components/create/create.component';
-import { CommonModule } from '@angular/common';
 import { MaintenanceJobService } from '../../../core/services/maintenance-job.service';
 import { MaintenanceJob } from '../../../core/models/maintenance-job';
 import { MaintenanceSpareService } from '../../../core/services/maintenance-spare.service';
@@ -11,7 +10,7 @@ import { MaintenanceSpare } from '../../../core/models/maintenance-spare';
 
 @Component({
   selector: 'app-spare-part-create',
-  imports: [CommonModule, CreateComponent],
+  imports: [CreateComponent],
   templateUrl: './spare-part-create.component.html',
   styleUrl: './spare-part-create.component.css'
 })
@@ -28,22 +27,17 @@ export class SparePartCreateComponent implements OnInit {
     id: 0,
     name: '',
     price: 0,
-    // maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0, spareParts: [] }
-   // maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0}
-
   };
-  
 
   maintenanceJobs: MaintenanceJob[] = []
 
-  constructor(private sparePartService: SparePartService, private maintenanceJobService: MaintenanceJobService, private maintenanceSpareService:MaintenanceSpareService, private router: Router) { }
+  constructor(private sparePartService: SparePartService, private maintenanceJobService: MaintenanceJobService, private maintenanceSpareService: MaintenanceSpareService, private router: Router) { }
 
   onSubmit(newItem: any) {
     this.sparePart = {
       id: newItem.id,
       name: newItem.name,
       price: newItem.price,
-     // maintenanceJob: newItem.maintenanceJob
     };
     this.sparePartService.create(this.sparePart).subscribe({
       next: (part) => {
@@ -61,23 +55,20 @@ export class SparePartCreateComponent implements OnInit {
     this.resetForm();
   }
 
-  addMaintenanceJobToSparePart(maintenanceJob: MaintenanceJob, sparePart: SparePart){
-    console.log('LOOOKK', sparePart)
+  addMaintenanceJobToSparePart(maintenanceJob: MaintenanceJob, sparePart: SparePart) {
     const maintenanceSpare: MaintenanceSpare = {
       maintenanceJob: maintenanceJob,
       sparePart: sparePart
     };
     this.maintenanceSpareService.create(maintenanceSpare).subscribe({
       next: (part) => {
-       console.log('maintenanceSpare object created!')
+        console.log('maintenanceSpare object created!')
       },
       error: (err) => {
         console.error('Failed to add the spar part:', err);
         alert('Failed to add the spare part. Please try again.');
       }
     });
-
-
   }
 
   resetForm() {
@@ -85,7 +76,6 @@ export class SparePartCreateComponent implements OnInit {
       id: 0,
       name: '',
       price: 0,
-   //   maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0, spareParts: [] }
     };
   }
 
@@ -93,7 +83,5 @@ export class SparePartCreateComponent implements OnInit {
     this.maintenanceJobService.getAll().subscribe((jobs) => {
       this.maintenanceJobs = jobs;
     });
-
   }
-
 }

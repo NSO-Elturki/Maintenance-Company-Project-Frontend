@@ -38,8 +38,6 @@
               <!-- Object Items -->
               <div *ngIf="isObject(data[key])">
                 <label class="font-weight-bold">{{labels[i]}}:</label>
-
-                <!-- Display object properties in one row using flexbox -->
                 <div class="d-flex align-items-center">
                   <div *ngFor="let subKey of objectKeys(data[key])" class="me-3">
                     <div *ngIf="!isArray(data[key][subKey])">
@@ -48,13 +46,12 @@
                         {{ data[key][subKey] }}</span>
                     </div>
                   </div>
-                  <!-- Button at the end -->
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Back Button -->
+          <!-- Delete Button -->
           <div class="mt-3 d-flex justify-content-end">
             <button class="btn btn-sm btn-danger" (click)="onDelete(data.id)">Delete</button>
           </div>

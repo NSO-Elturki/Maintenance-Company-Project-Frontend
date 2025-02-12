@@ -4,14 +4,12 @@ import { SchedluledMaintenanceJob } from '../../../core/models/schedluled-mainte
 import { MaintenanceJob } from '../../../core/models/maintenance-job';
 import { Router } from '@angular/router';
 import { MaintenanceJobService } from '../../../core/services/maintenance-job.service';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { CreateComponent } from '../../../shared/components/create/create.component';
 
 
 @Component({
   selector: 'app-schedluled-maintenance-job-create',
-  imports: [FormsModule, CommonModule, CreateComponent],
+  imports: [CreateComponent],
   templateUrl: './schedluled-maintenance-job-create.component.html',
   styleUrl: './schedluled-maintenance-job-create.component.css'
 })
@@ -30,7 +28,6 @@ export class SchedluledMaintenanceJobCreateComponent implements OnInit {
     id: 0,
     date: '',
     time: '',
-    // maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0, spareParts: [] }  // Initialize the address object
     maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0}  // Initialize the address object
 
   };
@@ -67,9 +64,7 @@ export class SchedluledMaintenanceJobCreateComponent implements OnInit {
       id: 0,
       date: '',
       time: '',
-      // maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0, spareParts: [] }
       maintenanceJob: { id: 0, name: '', costPerHour: 0, timeToFinish: 0}
-
     };
   }
 

@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 import { SchedluledMaintenanceJob } from '../../../core/models/schedluled-maintenance-job';
 import { Router } from '@angular/router';
 import { SchedluledMaintenanceJobService } from '../../../core/services/schedluled-maintenance-job.service';
-import { CommonModule } from '@angular/common';
 import { ListComponent } from '../../../shared/components/list/list.component';
 
 @Component({
   selector: 'app-schedluled-maintenance-job-list',
-  imports: [CommonModule, ListComponent],
+  imports: [ListComponent],
   templateUrl: './schedluled-maintenance-job-list.component.html',
   styleUrl: './schedluled-maintenance-job-list.component.css'
 })

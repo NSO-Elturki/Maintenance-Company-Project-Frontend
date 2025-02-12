@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs';
 @Component({
   selector: 'app-maintenance-job-details',
   standalone: true,
-  imports: [CommonModule, DetailsComponent],
+  imports: [DetailsComponent],
   templateUrl: './maintenance-job-details.component.html',
   styleUrls: ['./maintenance-job-details.component.css']
 })
@@ -27,27 +27,6 @@ export class MaintenanceJobDetailsComponent implements OnInit {
     this.getMaintenanceJob();
   }
 
-  // getMaintenanceJob(): void {
-  //   this.service.getById(this.jobId).subscribe({
-  //     next: (job) => {
-  //       this.job = job;
-  //     },
-  //     error: (err) => console.error('Failed to fetch maintenance job:', err),
-  //   });
-  // }
-
-  // fetchSpareParts() {
-  //   this.maintenanceSpareService.getAllSparePartsByMaintenanceJobID(this.jobId).subscribe({
-  //     next: (data) => {
-  //       if(this.job)
-  //         this.job.spareParts = data.map(item => item.sparePart);
-  //         console.log(this.job)
-  //     },
-  //     error: (err) => {
-  //       console.error('Error fetching spare parts:', err);
-  //     }
-  //   });
-  // }
   getMaintenanceJob(): void {
       this.service.getById(this.jobId).pipe(
         switchMap((job) => {

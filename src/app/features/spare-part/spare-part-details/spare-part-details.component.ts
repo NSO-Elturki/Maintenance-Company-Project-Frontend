@@ -25,7 +25,6 @@ export class SparePartDetailsComponent {
   ngOnInit(): void {
     this.sparePartId = +this.route.snapshot.params['id'];
     this.getSchedluledMaintenanceJob();
-    //this.fetchSpareParts()
   }
   getSchedluledMaintenanceJob(): void {
     this.service.getById(this.sparePartId).pipe(
