@@ -1,2 +1,14 @@
 <app-header></app-header>
-<router-outlet></router-outlet>
+<app-spare-part-list *ngIf="service.currentView() === Pages.SpareParts"></app-spare-part-list>
+<app-schedluled-maintenance-job-list
+    *ngIf="service.currentView() === Pages.ScheduledMaintenanceJobs"></app-schedluled-maintenance-job-list>
+<app-maintenance-job-list *ngIf="service.currentView() === Pages.MaintenanceJobs"></app-maintenance-job-list>
+<app-schedluled-maintenance-job-details
+    *ngIf="service.currentView() ===Pages.ViewScheduledMaintenanceJob"></app-schedluled-maintenance-job-details>
+<app-maintenance-job-details *ngIf="service.currentView() === Pages.ViewMaintenanceJob"></app-maintenance-job-details>
+<app-spare-part-details *ngIf="service.currentView() === Pages.ViewSparePart"></app-spare-part-details>
+<app-schedluled-maintenance-job-create
+    *ngIf="service.currentView() ===Pages.AddScheduledMaintenanceJob"></app-schedluled-maintenance-job-create>
+<app-spare-part-create *ngIf="service.currentView() ===Pages.AddSparePart"></app-spare-part-create>
+<app-maintenance-job-create-form
+    *ngIf="service.currentView() ===Pages.AddMaintenanceJob"></app-maintenance-job-create-form>

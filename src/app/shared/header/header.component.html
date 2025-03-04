@@ -8,17 +8,17 @@
       
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          
+
           <li class="nav-item">
-            <a class="nav-link" routerLink="/all-maintenance-jobs">Maintenance Jobs</a>
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/all-schedluled-maintenance-job">Scheduled Maintenance Jobs</a>
+            <a class="nav-link" href="#" (click)="onClick(Pages.ScheduledMaintenanceJobs)">Scheduled Maintenance Jobs</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/all-spare-parts">Spare Parts</a>
+            <a class="nav-link" href="#" (click)="onClick(Pages.MaintenanceJobs)">Maintenance Jobs</a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link"  href="#" (click)="onClick(Pages.SpareParts)">Spare Parts</a>
           </li>
   
         </ul>

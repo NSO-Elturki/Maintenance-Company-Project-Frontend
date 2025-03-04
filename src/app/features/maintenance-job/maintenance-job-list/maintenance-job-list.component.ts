@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ListComponent } from '../../../shared/components/list/list.component';
 import { FormsModule } from '@angular/forms';
 import { MaintenanceSpareService } from '../../../core/services/maintenance-spare.service';
+import { NavigateService } from '../../../core/services/navigate.service';
+import { Pages } from '../../../shared/enums/pages';
 
 @Component({
   selector: 'app-maintenance-job-list',
@@ -18,10 +20,10 @@ export class MaintenanceJobListComponent implements OnInit {
   maintenanceJobs: MaintenanceJob[] = [];
   spareParts: any[] = []
 
-  constructor(private service: MaintenanceJobService, private ms: MaintenanceSpareService, private router: Router) { }
+  constructor(private service: MaintenanceJobService, private ms: MaintenanceSpareService, private navigateService: NavigateService) { }
 
   onView(jobId: any) {
-    this.router.navigate(['/maintenance-job', jobId]);
+    this.navigateService.navigateTo(Pages.ViewMaintenanceJob, jobId)
   }
 
   onDelete(id: number) {
@@ -30,6 +32,10 @@ export class MaintenanceJobListComponent implements OnInit {
         this.maintenanceJobs = this.maintenanceJobs.filter(j => j.id !== id);
       });
     }
+  }
+
+  onCreate() {
+    this.navigateService.navigateTo(Pages.AddMaintenanceJob)
   }
 
   ngOnInit() {

@@ -4,6 +4,7 @@ import { MaintenanceJobService } from '../../../core/services/maintenance-job.se
 import { ActivatedRoute, Router } from '@angular/router';
 import { SchedluledMaintenanceJobService } from '../../../core/services/schedluled-maintenance-job.service';
 import { DetailsComponent } from '../../../shared/components/details/details.component';
+import { NavigateService } from '../../../core/services/navigate.service';
 
 
 @Component({
@@ -19,10 +20,10 @@ export class SchedluledMaintenanceJobDetailsComponent {
   labels = ['ID', 'Date', 'Time', 'Maintenance Job'];
 
 
-  constructor(private schedluledmaintenanceJobService: SchedluledMaintenanceJobService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private schedluledmaintenanceJobService: SchedluledMaintenanceJobService, private route: ActivatedRoute, private navigateService:NavigateService) {}
 
   ngOnInit(): void {
-    this.schedluledMaintenanceJobId = +this.route.snapshot.params['id'];
+    this.schedluledMaintenanceJobId = this.navigateService.currentItemId()
     this.getSchedluledMaintenanceJob();
   }
 
@@ -42,7 +43,7 @@ export class SchedluledMaintenanceJobDetailsComponent {
       this.schedluledmaintenanceJobService.delete(this.schedluledMaintenanceJobId).subscribe({
         next: () => {
           alert('Schedluled maintenance job deleted successfully!');
-          this.router.navigate(['/all-schedluled-maintenance-job']);
+        //  this.router.navigate(['/all-schedluled-maintenance-job']);
         },
         error: (err) => {
           console.error('Failed to delete schedluled maintenance job:', err);

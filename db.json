@@ -1,5 +1,12 @@
 {
-  "maintenanceJobs": [],
+  "maintenanceJobs": [
+    {
+      "id": 2301,
+      "name": "test",
+      "costPerHour": "1",
+      "timeToFinish": "11"
+    }
+  ],
   "scheduledMaintenanceJobs": [
     {
       "id": 2791,
@@ -8,6 +15,17 @@
       "maintenanceJob": {
         "id": 3631,
         "name": "test1",
+        "costPerHour": "11",
+        "timeToFinish": "1"
+      }
+    },
+    {
+      "id": 7789,
+      "date": "2025-03-07",
+      "time": "00:03",
+      "maintenanceJob": {
+        "id": 8699,
+        "name": "test",
         "costPerHour": "11",
         "timeToFinish": "1"
       }

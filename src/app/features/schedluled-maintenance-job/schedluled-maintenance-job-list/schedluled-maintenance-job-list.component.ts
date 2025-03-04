@@ -3,6 +3,8 @@ import { SchedluledMaintenanceJob } from '../../../core/models/schedluled-mainte
 import { Router } from '@angular/router';
 import { SchedluledMaintenanceJobService } from '../../../core/services/schedluled-maintenance-job.service';
 import { ListComponent } from '../../../shared/components/list/list.component';
+import { NavigateService } from '../../../core/services/navigate.service';
+import { Pages } from '../../../shared/enums/pages';
 
 @Component({
   selector: 'app-schedluled-maintenance-job-list',
@@ -14,10 +16,13 @@ export class SchedluledMaintenanceJobListComponent {
   columns = ['id', 'date', 'time', 'maintenanceJob']
   schedludMaintenanceJobs: SchedluledMaintenanceJob[] = [];
 
-  constructor(private service: SchedluledMaintenanceJobService, private router: Router) { }
+  constructor(private service: SchedluledMaintenanceJobService, private navigateService:NavigateService) { }
 
   onView(id: any) {
-    this.router.navigate(['/schedluled-maintenance-job', id]);
+    //this.router.navigate(['/schedluled-maintenance-job', id]);
+    this.navigateService.navigateTo(Pages.ViewScheduledMaintenanceJob, id)
+
+    
   }
 
   onDelete(id: number) {
@@ -28,8 +33,13 @@ export class SchedluledMaintenanceJobListComponent {
     }
   }
 
+  onCreate(){
+    this.navigateService.navigateTo(Pages.AddScheduledMaintenanceJob)
+  }
+
+
   navigateToCreate() {
-    this.router.navigate(['/create-schedluled-maintenance-job']);
+    this.navigateService.navigateTo(Pages.AddScheduledMaintenanceJob)
   }
 
   ngOnInit() {

@@ -3,6 +3,8 @@ import { ListComponent } from '../../../shared/components/list/list.component';
 import { SparePart } from '../../../core/models/spare-part';
 import { Router } from '@angular/router';
 import { SparePartService } from '../../../core/services/spare-part.service';
+import { NavigateService } from '../../../core/services/navigate.service';
+import { Pages } from '../../../shared/enums/pages';
 
 
 @Component({
@@ -16,10 +18,10 @@ export class SparePartListComponent implements OnInit {
   columns = ['id', 'name', 'price']
   spareParts: SparePart[] = []
 
-  constructor(private sparePartService: SparePartService, private router: Router) { }
+  constructor(private sparePartService: SparePartService, private navigateService: NavigateService) { }
 
   onView(id: any) {
-    this.router.navigate(['/spare-part', id]);
+    this.navigateService.navigateTo(Pages.ViewSparePart, id)
   }
 
   onDelete(id: number) {
@@ -28,6 +30,10 @@ export class SparePartListComponent implements OnInit {
         this.spareParts = this.spareParts.filter(j => j.id !== id);
       });
     }
+  }
+
+  onCreate(){
+    this.navigateService.navigateTo(Pages.AddSparePart)
   }
 
   ngOnInit(): void {

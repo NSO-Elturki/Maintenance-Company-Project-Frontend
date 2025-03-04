@@ -3,6 +3,8 @@ import { MaintenanceJob } from '../../../core/models/maintenance-job';
 import { MaintenanceJobService } from '../../../core/services/maintenance-job.service';
 import { Router } from '@angular/router';
 import { CreateComponent } from '../../../shared/components/create/create.component';
+import { NavigateService } from '../../../core/services/navigate.service';
+import { Pages } from '../../../shared/enums/pages';
 
 @Component({
   selector: 'app-maintenance-job-create-form',
@@ -25,10 +27,9 @@ export class MaintenanceJobCreateFormComponent {
     name: '',
     costPerHour: 0,
     timeToFinish: 0,
-   // spareParts: []
   };
 
-  constructor(private service: MaintenanceJobService, private router: Router) { }
+  constructor(private service: MaintenanceJobService, private navigateService:NavigateService) { }
 
   onSubmit(newItem: any) {
     this.maintenanceJob = {
@@ -36,12 +37,11 @@ export class MaintenanceJobCreateFormComponent {
       name: newItem.name,
       costPerHour: newItem.costPerHour,
       timeToFinish: newItem.timeToFinish,
-     // spareParts: []
     };
     this.service.create(this.maintenanceJob).subscribe({
       next: (part) => {
         if (confirm('Job added successfully! Do you want to go to the maintenance job list?')) {
-          this.router.navigate(['/all-maintenance-jobs']);
+          this.navigateService.navigateTo(Pages.MaintenanceJobs)
         }
       },
       error: (err) => {

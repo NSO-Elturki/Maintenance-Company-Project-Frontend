@@ -6,6 +6,8 @@ import { MaintenanceJobService } from '../../../core/services/maintenance-job.se
 import { DetailsComponent } from '../../../shared/components/details/details.component';
 import { MaintenanceSpareService } from '../../../core/services/maintenance-spare.service';
 import { switchMap } from 'rxjs';
+import { NavigateService } from '../../../core/services/navigate.service';
+import { Pages } from '../../../shared/enums/pages';
 
 @Component({
   selector: 'app-maintenance-job-details',
@@ -20,10 +22,10 @@ export class MaintenanceJobDetailsComponent implements OnInit {
   job: MaintenanceJob | undefined;
   labels = ['ID', 'Name', 'Cost Per Hour', 'Duration', 'Spare Parts'];
 
-  constructor(private service: MaintenanceJobService, private route: ActivatedRoute, private maintenanceSpareService:MaintenanceSpareService , private router: Router) { }
+  constructor(private service: MaintenanceJobService, private route: ActivatedRoute, private maintenanceSpareService:MaintenanceSpareService , private navigateService:NavigateService) { }
 
   ngOnInit(): void {
-    this.jobId = +this.route.snapshot.params['id'];
+    this.jobId = this.navigateService.currentItemId();
     this.getMaintenanceJob();
   }
 
@@ -49,7 +51,7 @@ export class MaintenanceJobDetailsComponent implements OnInit {
       this.service.delete(this.jobId).subscribe({
         next: () => {
           alert('Maintenance job deleted successfully!');
-          this.router.navigate(['/all-maintenance-jobs']);
+          this.navigateService.navigateTo(Pages.MaintenanceJobs)
         },
         error: (err) => {
           console.error('Failed to delete maintenance job:', err);

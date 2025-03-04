@@ -2,7 +2,7 @@
   [data]="schedludMaintenanceJobs" 
   [columns]="columns"
   [tableTitle]="'Schedluled Maintenance Jobs'"
-  [createPath]="'/create-schedluled-maintenance-job'"
   (viewItem)="onView($event)"
   (deleteItem)="onDelete($event)"
+  (createItem)="onCreate()"
 ></app-list>

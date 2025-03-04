@@ -12,9 +12,10 @@ export class ListComponent {
   @Input() data: any[] = []
   @Input() columns: string[] = []
   @Input() tableTitle: string=''
-  @Input() createPath: string= ''
   @Output() viewItem = new EventEmitter<any>();
   @Output() deleteItem = new EventEmitter<any>();
+  @Output() createItem = new EventEmitter<void>();
+
   
 
   onView(item: any) {
@@ -23,6 +24,10 @@ export class ListComponent {
 
   onDelete(item: any) {
     this.deleteItem.emit(item);
+  }
+
+  onCreate() {
+    this.createItem.emit();
   }
 
 }

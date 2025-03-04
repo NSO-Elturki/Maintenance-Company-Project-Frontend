@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DetailsComponent } from '../../../shared/components/details/details.component';
 import { MaintenanceSpareService } from '../../../core/services/maintenance-spare.service';
 import { switchMap } from 'rxjs';
+import { NavigateService } from '../../../core/services/navigate.service';
+import { Pages } from '../../../shared/enums/pages';
 
 @Component({
   selector: 'app-spare-part-details',
@@ -20,10 +22,10 @@ export class SparePartDetailsComponent {
   labels = ['ID', 'Name', 'Price', 'Maintenance Job'];
 
 
-  constructor(private maintenanceSpareService:MaintenanceSpareService,  private service: SparePartService,  private route: ActivatedRoute, private router: Router) { }
+  constructor(private maintenanceSpareService:MaintenanceSpareService,  private service: SparePartService,  private route: ActivatedRoute, private navigateService:NavigateService) { }
 
   ngOnInit(): void {
-    this.sparePartId = +this.route.snapshot.params['id'];
+    this.sparePartId = this.navigateService.currentItemId();
     this.getSchedluledMaintenanceJob();
   }
   getSchedluledMaintenanceJob(): void {
@@ -48,7 +50,7 @@ export class SparePartDetailsComponent {
       this.service.delete(this.sparePartId).subscribe({
         next: () => {
           alert('Spare part deleted successfully!');
-          this.router.navigate(['/all-spare-part']);
+          this.navigateService.navigateTo(Pages.SpareParts)
         },
         error: (err) => {
           console.error('Failed to delete spare part:', err);
